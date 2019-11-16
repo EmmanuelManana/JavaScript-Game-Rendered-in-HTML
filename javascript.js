@@ -42,12 +42,14 @@ var ctx = canvas.getContext("2d");
 var x = canvas.width/2;
 var y = canvas.height - 30;
 //change in position
-var dx = 2;
+var dx = -2;
 var dy = -2;
+//ball properties
+var ballRadius = 10;
 
 function drawball() {
     ctx.beginPath();
-    ctx.arc(x, y, 10, 0, Math.PI*2);
+    ctx.arc(x, y, ballRadius, 0, Math.PI*2);
     ctx.fillStyle = "#0095DD";
     ctx.fill();
     ctx.closePath();
@@ -58,7 +60,16 @@ function draw() {
     drawball();
     x += dx;
     y += dy;
+
+    if ( y + dy < ballRadius || y + dy > canvas.height - ballRadius)
+    {
+        dy = -dy;
+    }
+    else if ( x + dx < ballRadius  || x + dx > canvas.width - ballRadius )
+    {
+        dx = -dx;
+    }
 }
-setInterval(draw, 40);
+setInterval(draw, 8);
 
 
